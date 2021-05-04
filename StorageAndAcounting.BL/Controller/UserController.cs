@@ -27,7 +27,6 @@ namespace StorageAndAcounting.BL.Controller
         /// <summary>
         /// Constructor if Guest logged in.
         /// </summary>
-        /// <exception cref="ArgumentNullException"> Thrown if name are empty or null. </exception>
         public UserController()
         {
             CurrentUser = new User("Guest");
@@ -60,7 +59,11 @@ namespace StorageAndAcounting.BL.Controller
 
             foreach (var item in Users)
             {
-                if (item.Name == userName) currentUser = item;
+                if (item.Name == userName)
+                {
+                    currentUser = item;
+                    break;
+                }
             }
 
             if(currentUser == null)
@@ -91,7 +94,11 @@ namespace StorageAndAcounting.BL.Controller
             User currentUser = null;
             foreach (var item in Users)
             {
-                if (item.Name == userName) currentUser = item;
+                if (item.Name == userName)
+                {
+                    currentUser = item;
+                    break;
+                }
             }
 
             if (currentUser != null)

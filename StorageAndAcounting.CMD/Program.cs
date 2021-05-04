@@ -13,6 +13,10 @@ namespace StorageAndAcounting.CMD
     {
         static void Main()
         {
+            //var temp = new Wines();
+            //Console.WriteLine(temp.GetPrice("Marlborough Sun"));
+
+            #region user controlling
             Console.WriteLine("Register(0) or already registered(1)");
             int a = int.Parse(Console.ReadLine());
             UserController user;
@@ -50,7 +54,8 @@ namespace StorageAndAcounting.CMD
             {
                 Console.WriteLine(ex.Message);
             }
-
+            #endregion
+            
         }
     }
 }
