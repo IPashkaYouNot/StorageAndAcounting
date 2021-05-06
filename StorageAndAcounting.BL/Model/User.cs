@@ -32,9 +32,9 @@ namespace StorageAndAcounting.BL.Model
             #region Data validation
             if (Age <= 14 || Age >= 150) throw new ArgumentException("Date of birth is invalid.");
 
-            if (string.IsNullOrWhiteSpace(userName)) throw new ArgumentNullException("Name is empty or null.", nameof(userName));
+            if (string.IsNullOrWhiteSpace(userName)) throw new ArgumentNullException(nameof(userName), "Name is empty or null.");
 
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException("Password is empty or null.", nameof(password));
+            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password), "Password is empty or null.");
             #endregion
 
             Name = userName;

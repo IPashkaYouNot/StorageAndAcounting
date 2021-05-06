@@ -7,8 +7,30 @@ using System.Threading.Tasks;
 
 namespace StorageAndAcounting.BL.Model
 {
+    [Serializable]
     public class Wines : Goods
     {
+        // TODO: add static constructor, that initializes all brands
+        public override string Id { get; }
+
+        public override string Brand { get; }
+
+        public override decimal Price { get; }
+
+        // TODO: replace with constructor only with brand and price variables
+        public Wines(string id, string brand, decimal price)
+        {
+            // TODO: add validation
+            Id = id;
+            Brand = brand;
+            Price = price;
+        }
+
+        // TODO: add method that checks if brand is correct
+        // TODO: add method that initialize id by brand
+
+        /*
+
         /// <summary>
         /// Info about wine: id and brand.
         /// </summary>
@@ -78,5 +100,6 @@ namespace StorageAndAcounting.BL.Model
             // TODO: add validation
             return BrandsDict.FirstOrDefault(x => x.Value == brand).Key;
         }
+        */
     }
 }

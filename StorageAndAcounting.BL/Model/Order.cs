@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace StorageAndAcounting.BL.Model
 {
+    [Serializable]
     public class Order
     {
         /// <summary>
@@ -19,6 +20,7 @@ namespace StorageAndAcounting.BL.Model
         /// <summary>
         /// Variable if user is registered or guest.
         /// </summary>
+        // TODO: add register validation
         public bool IsRegistered { get; }
 
         /// <param name="currentUser"> Current User. </param>
@@ -46,6 +48,16 @@ namespace StorageAndAcounting.BL.Model
             {
                 Basket.Add(id, amount);
             }
+        }
+
+        public void DelFromBasket(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id)) throw new ArgumentNullException("Id is null.", nameof(id));
+            if(!Basket.TryGetValue(id, out _))
+            {
+                throw new ArgumentException("There is no type of this product in your basket.", nameof(id));
+            }
+            Basket.Remove(id);
         }
     }
 }
