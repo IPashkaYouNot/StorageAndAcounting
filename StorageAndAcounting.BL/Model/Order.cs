@@ -12,7 +12,7 @@ namespace StorageAndAcounting.BL.Model
         /// <summary>
         /// List of all goods of User with their ids.
         /// </summary>
-        public Dictionary<string, int> Basket { get; }
+        public Dictionary<string, int> Basket { get; set; }
         /// <summary>
         /// Current User.
         /// </summary>
@@ -20,8 +20,7 @@ namespace StorageAndAcounting.BL.Model
         /// <summary>
         /// Variable if user is registered or guest.
         /// </summary>
-        // TODO: add register validation
-        public bool IsRegistered { get; }
+        public bool IsSent { get; set; }
 
         /// <param name="currentUser"> Current User. </param>
         /// <exception cref="ArgumentNullException"> Thrown if current user is null. </exception>
@@ -29,6 +28,17 @@ namespace StorageAndAcounting.BL.Model
         {
             CurrentUser = currentUser ?? throw new ArgumentNullException("User is null.", nameof(currentUser));
             Basket = new Dictionary<string, int>();
+            IsSent = false;
+        }
+
+        public bool IsEmpty()
+        {
+            bool isEmpty = true;
+            foreach (var item in Basket)
+            {
+                if ((item.Value > 0)) isEmpty = false;
+            }
+            return isEmpty;
         }
 
         /// <summary>

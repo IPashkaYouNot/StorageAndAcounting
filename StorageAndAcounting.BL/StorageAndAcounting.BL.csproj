@@ -42,13 +42,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\ControllerBase.cs" />
+    <Compile Include="Controller\GoodsController.cs" />
     <Compile Include="Controller\OrderController.cs" />
     <Compile Include="Controller\UserController.cs" />
+    <Compile Include="Model\Calendar.cs" />
+    <Compile Include="Model\Cheeese.cs" />
+    <Compile Include="Model\Clothes.cs" />
     <Compile Include="Model\Goods.cs" />
+    <Compile Include="Model\Storage.cs" />
     <Compile Include="Model\Wines.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

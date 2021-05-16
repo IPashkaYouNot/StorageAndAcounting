@@ -7,22 +7,22 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace StorageAndAcounting.BL.Controller
 {
-    public class UserController
+    public class UserController : ControllerBase
     {
         /// <summary>
         /// List of registered users.
         /// </summary>
-        public List<User> Users { get; }
+        public List<User> Users { get; private set; }
 
         /// <summary>
         /// Current User.
         /// </summary>
-        public User CurrentUser { get; }
+        public User CurrentUser { get; private set; }
 
         /// <summary>
         /// Variable to check if user is Guest.
         /// </summary>
-        private bool IsGuest { get; } = true;
+        private bool IsGuest { get; set; } = true;
 
         /// <summary>
         /// Constructor if Guest logged in.
@@ -33,13 +33,13 @@ namespace StorageAndAcounting.BL.Controller
         }
 
         /// <summary>
-        /// Constructor for registered User.
+        /// Method to change User for registered.
         /// </summary>
         /// <param name="userName"> Name of user. </param>
         /// <param name="password"> Password of user. </param>
         /// <exception cref="ArgumentNullException"> Thrown if name or password are empty or null. </exception>
         /// <exception cref="ArgumentException"> Thrown if name of user was not found or password was incorrect. </exception>
-        public UserController(string userName, string password)
+        public bool ChangeUser(string userName, string password)
         {
             #region Data validation
             if (string.IsNullOrWhiteSpace(userName))
@@ -68,15 +68,16 @@ namespace StorageAndAcounting.BL.Controller
 
             if(currentUser == null)
             {
-                throw new ArgumentException("User was not found.", nameof(currentUser));
+                throw new ArgumentException("User was not found.");
             }
 
             if (!currentUser.CheckPassword(password))
             {
-                throw new ArgumentException("Password is incorrect.", nameof(password));
+                throw new ArgumentException("Password is incorrect.");
             }
             IsGuest = false;
             CurrentUser = currentUser;
+            return true;
         }
 
         /// <summary>
@@ -88,7 +89,7 @@ namespace StorageAndAcounting.BL.Controller
         /// <exception cref="ArgumentException"> Thrown if User with same name exists or birth date is less than 14 or more than 150. </exception>
         /// <exception cref="ArgumentNullException"> Thrown if name, password or birth date are empty or null. </exception>
         /// <exception cref="FormatException"> Thrown if birth data contains non valid presentation. </exception>
-        public UserController(string userName, string birthDate, string password)
+        public bool RegisterUser(string userName, string birthDate, string password)
         {
             Users = GetUsersData();
             User currentUser = null;
@@ -103,13 +104,14 @@ namespace StorageAndAcounting.BL.Controller
 
             if (currentUser != null)
             {
-                throw new ArgumentException("This User already exists.", nameof(userName));
+                throw new ArgumentException("This User already exists.");
             }
 
             IsGuest = false;
             CurrentUser = new User(userName, password, birthDate);
             Users.Add(CurrentUser);
             Save();
+            return true;
         }
 
         /// <summary>
@@ -118,19 +120,7 @@ namespace StorageAndAcounting.BL.Controller
         /// <returns> Users list. </returns>
         private List<User> GetUsersData()
         {
-            var formatter = new BinaryFormatter();
-
-            using (var fs = new FileStream("Users.dat", FileMode.OpenOrCreate))
-            {
-                if (fs.Length != 0)
-                {
-                    if (formatter.Deserialize(fs) is List<User> users)
-                    {
-                        return users;
-                    }
-                }
-                return new List<User>();
-            }
+            return Load<List<User>>("Users.dat") ?? new List<User>();
         }
 
         /// <summary>
@@ -138,11 +128,7 @@ namespace StorageAndAcounting.BL.Controller
         /// </summary>
         private void Save()
         {
-            var formatter = new BinaryFormatter();
-            using (var fs = new FileStream("Users.dat", FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, Users);
-            }
+            Save("Users.dat", Users);
         }
     }
 }

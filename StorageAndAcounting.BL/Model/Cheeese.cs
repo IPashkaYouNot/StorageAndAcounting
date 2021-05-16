@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace StorageAndAcounting.BL.Model
 {
-    public class Wines : Goods
+    public class Cheeese : Goods
     {
         public static Dictionary<string, decimal> PricesByBrands { get; }
 
         static Dictionary<string, string> IdsByBrands { get; }
 
-        static Wines()
+        static Cheeese()
         {
             GetInfo(out Dictionary<string, decimal> tempPrices, out Dictionary<string, string> tempIds);
             PricesByBrands = tempPrices;
@@ -25,12 +25,12 @@ namespace StorageAndAcounting.BL.Model
             prices = new Dictionary<string, decimal>();
             ids = new Dictionary<string, string>();
 
-            using(var sr = new StreamReader("WineInfo.txt"))
+            using (var sr = new StreamReader("CheeseInfo.txt"))
             {
                 while (!sr.EndOfStream)
                 {
                     string[] row = sr.ReadLine().Split();
-                    if (row.Length < 3) throw new ArgumentException("Wrong wine file.");
+                    if (row.Length < 3) throw new ArgumentException("Wrong cheese file.");
                     if (!decimal.TryParse(row[row.Length - 2], out decimal price)) throw new ArgumentException("Wrong wine file input.");
                     string id = row[row.Length - 1];
                     string brand = row[0];
@@ -51,7 +51,7 @@ namespace StorageAndAcounting.BL.Model
 
         public override decimal Price { get; }
 
-        public Wines(string brand)
+        public Cheeese(string brand)
         {
             if (string.IsNullOrWhiteSpace(brand)) throw new ArgumentNullException("Brand is NULL.");
 
@@ -61,5 +61,6 @@ namespace StorageAndAcounting.BL.Model
             Brand = brand;
             Price = PricesByBrands[brand];
         }
+ 
     }
 }

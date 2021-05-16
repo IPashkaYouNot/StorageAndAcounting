@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="StorageAndAcounting.BL.Controller.ControllerBase">
+    <Position X="4.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controller\ControllerBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StorageAndAcounting.BL.Controller.GoodsController">
+    <Position X="12.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAgAAAAAACAAAAAAAAAAAEQAAAAAAAAA=</HashCode>
+      <FileName>Controller\GoodsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StorageAndAcounting.BL.Controller.OrderController">
+    <Position X="5.25" Y="5.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAIAEIBgAAAAAAAAAAAAAAEAIAAAAgAAAAIAAAg=</HashCode>
+      <FileName>Controller\OrderController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StorageAndAcounting.BL.Controller.UserController">
+    <Position X="3" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAKAAEIAAAAAAAAAAAQAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Controller\UserController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StorageAndAcounting.BL.Model.Calendar">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAEAAAAAEAAAAAAA=</HashCode>
+      <FileName>Model\Calendar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StorageAndAcounting.BL.Model.Cheeese" Collapsed="true">
+    <Position X="8.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAABAAAAAAAAAAAAAAAAEAAAAAAAAABAIA=</HashCode>
+      <FileName>Model\Cheeese.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StorageAndAcounting.BL.Model.Clothes" Collapsed="true">
+    <Position X="8.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAABAAAAAAAAAAAAAAAAEAAAAAAAAABAIA=</HashCode>
+      <FileName>Model\Clothes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StorageAndAcounting.BL.Model.Goods" Collapsed="true">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Model\Goods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StorageAndAcounting.BL.Model.Order">
+    <Position X="3" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAgAAAAIAAgAAAAAAAAAAAAAAAAAAAAgAQAAAAAAA=</HashCode>
+      <FileName>Model\Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StorageAndAcounting.BL.Model.Storage">
+    <Position X="8.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABgAAAAQAAAEAAQAgBAAAAAAIAAAAIAAAA=</HashCode>
+      <FileName>Model\Storage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StorageAndAcounting.BL.Model.User">
+    <Position X="0.5" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAEAAAAQAAAAAAAACAAAAAIAAAAA=</HashCode>
+      <FileName>Model\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StorageAndAcounting.BL.Model.Wines" Collapsed="true">
+    <Position X="8.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAABAAAAAAAAAAAAAAAAEAAAAAAAAABAIA=</HashCode>
+      <FileName>Model\Wines.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

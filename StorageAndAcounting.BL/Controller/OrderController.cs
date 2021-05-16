@@ -11,24 +11,31 @@ namespace StorageAndAcounting.BL.Controller
 {
     public class OrderController : ControllerBase
     {
-        private const string ORDERS_FILE_NAME = "Orders.dat";
-        private const string BASKETS_FILE_NAME = "Baskets.dat";
-        public Order CurrentOrder { get; }
+        /// <summary>
+        /// Order of current user.
+        /// </summary>
+        public Order CurrentOrder { get; private set; }
 
-        public Dictionary<Goods, int> CurrentBasket { get; set; }
+        public Dictionary<Goods, int> CurrentBasket { get; private set; }
 
-        private readonly User CurrentUser;
+        private User CurrentUser;
 
-        public List<Order> AllOrders { get; }
+        public List<Order> AllOrders { get; private set; }
 
-        public Dictionary<User, Dictionary<Goods, int>> AllBaskets { get; }
+        public Dictionary<User, Dictionary<Goods, int>> AllBaskets { get; private set; }
 
-        public OrderController(User user)
+        public OrderController()
+        {
+            AllOrders = new List<Order>();
+            AllBaskets = new Dictionary<User, Dictionary<Goods, int>>();
+        }
+
+        public void ChangeUser(User user)
         {
             if(user == null) throw new ArgumentNullException("User is NULL.", nameof(user));
-            AllOrders = GetOrders();
-            AllBaskets = GetBaskets();
+
             var tempOrd = AllOrders.FirstOrDefault(o => o.CurrentUser.Name == user.Name);
+
             if(tempOrd == null)
             {
                 CurrentOrder = new Order(user);
@@ -36,8 +43,8 @@ namespace StorageAndAcounting.BL.Controller
                 CurrentBasket = new Dictionary<Goods, int>();
                 AllOrders.Add(CurrentOrder);
                 AllBaskets.Add(CurrentUser, CurrentBasket);
-                SaveInfo();
             }
+
             else
             {
                 foreach (var item in AllOrders)
@@ -51,6 +58,49 @@ namespace StorageAndAcounting.BL.Controller
                 foreach (var item in AllBaskets)
                 {
                     if (item.Key.Name == user.Name) CurrentBasket = item.Value;
+                }
+            }
+        }
+
+        public void FinishOrder()
+        {
+            CurrentOrder.IsSent = true;
+            CurrentBasket.Clear();
+        }
+
+        public bool CheckCurrentOrder()
+        {
+            var temp = CurrentOrder.IsEmpty();
+            if (temp)
+            {
+                AllOrders.Remove(CurrentOrder);
+                CurrentOrder = new Order(CurrentUser);
+                AllOrders.Add(CurrentOrder);
+            }
+            return temp;
+        }
+
+
+        public void CheckOrders(object obj, EventArgs args)
+        {
+            var temp = new List<Order>(AllOrders.ToArray());
+
+            foreach (var item in temp)
+            {
+                if (item.IsEmpty())
+                {
+                    if (item == CurrentOrder)
+                    {
+                        CurrentOrder = new Order(CurrentUser);
+                        AllOrders.Remove(item);
+                        AllOrders.Add(CurrentOrder);
+                    }
+                    else
+                    {
+                        AllOrders.Remove(item);
+                        var order = new Order(item.CurrentUser);
+                        AllOrders.Add(order);
+                    }
                 }
             }
         }
@@ -75,24 +125,24 @@ namespace StorageAndAcounting.BL.Controller
             {
                 CurrentBasket[temp] += amount;
             }
-
-            SaveInfo();
         }
 
-        // TODO: add method that deletes goods from basket
 
-        private List<Order> GetOrders()
+        public void Delete(Goods goods)
         {
-            return Load<List<Order>>(ORDERS_FILE_NAME) ?? new List<Order>();
+            if (goods == null) throw new ArgumentNullException("Product is null.", nameof(goods));
+
+            Goods temp = null;
+            foreach (var item in CurrentBasket)
+            {
+                if (item.Key.Id == goods.Id) temp = item.Key;
+            }
+            if(temp == null)
+            {
+                throw new ArgumentException("There is no this type of product in basket.");
+            }
+            CurrentBasket.Remove(temp);
         }
-        private Dictionary<User, Dictionary<Goods, int>> GetBaskets()
-        {
-            return Load<Dictionary<User, Dictionary<Goods, int>>>(BASKETS_FILE_NAME) ?? new Dictionary<User, Dictionary<Goods, int>>();
-        }
-        private void SaveInfo()
-        {
-            Save(BASKETS_FILE_NAME, AllBaskets);
-            Save(ORDERS_FILE_NAME, AllOrders);
-        }
+
     }
 }
