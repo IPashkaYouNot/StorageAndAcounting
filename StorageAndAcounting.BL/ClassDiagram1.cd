@@ -15,11 +15,19 @@
     </TypeIdentifier>
   </Class>
   <Class Name="StorageAndAcounting.BL.Controller.OrderController">
-    <Position X="5.25" Y="5.75" Width="2.5" />
+    <Position X="4.75" Y="5.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAIAEIBgAAAAAAAAAAAAAAEAIAAAAgAAAAIAAAg=</HashCode>
       <FileName>Controller\OrderController.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="CurrentUser" />
+      <Property Name="CurrentOrder" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="AllOrders" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="StorageAndAcounting.BL.Controller.UserController">
     <Position X="3" Y="6" Width="1.5" />
@@ -27,29 +35,32 @@
       <HashCode>EAAAAKAAEIAAAAAAAAAAAQAAAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>Controller\UserController.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CurrentUser" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="StorageAndAcounting.BL.Model.Calendar">
-    <Position X="6.5" Y="1.75" Width="1.5" />
+    <Position X="1.25" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAEAAAAAEAAAAAAA=</HashCode>
       <FileName>Model\Calendar.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StorageAndAcounting.BL.Model.Cheeese" Collapsed="true">
-    <Position X="8.5" Y="8.75" Width="1.5" />
+    <Position X="9.5" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAQAABAAAAAAAAAAAAAAAAEAAAAAAAAABAIA=</HashCode>
       <FileName>Model\Cheeese.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="StorageAndAcounting.BL.Model.Clothes" Collapsed="true">
+  <Class Name="StorageAndAcounting.BL.Model.Clothes">
     <Position X="8.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAQAABAAAAAAAAAAAAAAAAEAAAAAAAAABAIA=</HashCode>
       <FileName>Model\Clothes.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="StorageAndAcounting.BL.Model.Goods" Collapsed="true">
+  <Class Name="StorageAndAcounting.BL.Model.Goods">
     <Position X="10.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
@@ -69,6 +80,9 @@
       <HashCode>AAAAAAAAAABgAAAAQAAAEAAQAgBAAAAAAIAAAAIAAAA=</HashCode>
       <FileName>Model\Storage.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="OrdersQueue" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="StorageAndAcounting.BL.Model.User">
     <Position X="0.5" Y="6.25" Width="1.75" />
@@ -78,7 +92,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="StorageAndAcounting.BL.Model.Wines" Collapsed="true">
-    <Position X="8.5" Y="7.5" Width="1.5" />
+    <Position X="10.25" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAQAABAAAAAAAAAAAAAAAAEAAAAAAAAABAIA=</HashCode>
       <FileName>Model\Wines.cs</FileName>

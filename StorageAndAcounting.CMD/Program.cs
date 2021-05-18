@@ -75,11 +75,19 @@ namespace StorageAndAcounting.CMD
                                     var quantity = Enum.GetNames(typeof(Items)).Length;
                                     Console.Clear();
                                     Console.WriteLine("What type of product you want?");
+                                    if(orderController.CurrentOrder.CurrentUser.Age > 18)
                                     foreach (var item in (Items[])Enum.GetValues(typeof(Items)))
                                     {
                                         Console.WriteLine((int)item + ") " + item);
                                     }
+                                    else
+                                    foreach (var item in (Items[])Enum.GetValues(typeof(Items)))
+                                    {
+                                        if(item != Items.Wine)
+                                        Console.WriteLine(((int)item-1) + ") " + item);
+                                    }
                                     ChooseLimits(1, quantity, "Your chosen item: ", out int good);
+                                    if (orderController.CurrentOrder.CurrentUser.Age < 18) good++;
                                     PrintBrands(GoodsController.GetBrands((Items)good));
                                     ChooseLimits(1, GoodsController.GetAmount((Items)good), "Choose what you want: ", out int brand);
                                     ChooseLimits(1, 100, "Type amount (less than 100): ", out int amount);
@@ -95,6 +103,8 @@ namespace StorageAndAcounting.CMD
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine(ex.Message);
                                     Console.ResetColor();
+                                    Console.Write("Type any key to continue...");
+                                    Console.ReadKey();
                                 }
                             }
                             break;
@@ -255,9 +265,6 @@ namespace StorageAndAcounting.CMD
 
             ChangeUser(userController, orderController);
 
-            
-
-            // TODO: add information about completed orders (for current user)
             calendar.NewDay += storage.GetItemsFromProvider;
             calendar.NewDay += storage.CheckOrders;
             calendar.NewDay += orderController.CheckOrders;
@@ -269,6 +276,7 @@ namespace StorageAndAcounting.CMD
                 Console.Write("Type any key to move to the menu . . .");
                 Console.ReadKey();
                 Console.Clear();
+                Console.WriteLine("Day today: " + calendar.GetDayOfWeek() + "\n");
                 Menu();
                 ChooseLimits(1, 6, "Type your option: ", out int choose);
                 Console.WriteLine();

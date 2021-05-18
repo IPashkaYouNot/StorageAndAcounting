@@ -10,7 +10,7 @@ namespace StorageAndAcounting.BL.Model
     {
         public event EventHandler NewDay;
 
-        public int DayOfWeek { get; private set; } = 0;
+        public int DayOfWeek { get; private set; } = 1;
 
         public void MoveOneDay()
         {
@@ -19,7 +19,18 @@ namespace StorageAndAcounting.BL.Model
             if (DayOfWeek != 6 && DayOfWeek != 7)
             {
                 NewDay?.Invoke(this, null);
-            }
+            }   
+        }
+
+        public string GetDayOfWeek()
+        {
+            if (DayOfWeek == 1) return "Monday";
+            if (DayOfWeek == 2) return "Tuesday";
+            if (DayOfWeek == 3) return "Wednesday";
+            if (DayOfWeek == 4) return "Thursday";
+            if (DayOfWeek == 5) return "Friday";
+            if (DayOfWeek == 6) return "Saturday";
+            return "Sunday";
         }
 
     }

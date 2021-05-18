@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StorageAndAcounting.BL.Controller
 {
-    public class OrderController : ControllerBase
+    public class OrderController : ControllerBase, IUserChangeable
     {
         /// <summary>
         /// Order of current user.
@@ -30,7 +30,7 @@ namespace StorageAndAcounting.BL.Controller
             AllBaskets = new Dictionary<User, Dictionary<Goods, int>>();
         }
 
-        public void ChangeUser(User user)
+        public bool ChangeUser(User user)
         {
             if(user == null) throw new ArgumentNullException("User is NULL.", nameof(user));
 
@@ -60,6 +60,7 @@ namespace StorageAndAcounting.BL.Controller
                     if (item.Key.Name == user.Name) CurrentBasket = item.Value;
                 }
             }
+            return true;
         }
 
         public void FinishOrder()
@@ -107,6 +108,7 @@ namespace StorageAndAcounting.BL.Controller
 
         public void Add(Goods goods, int amount)
         {
+            if (goods.IsEighteen && CurrentUser.Age < 18) throw new ArgumentException("You are not old enough to order alcohol.");
             if (goods == null) throw new ArgumentNullException("Product is null.", nameof(goods));
             if (amount <= 0) throw new ArgumentException("Amount should be positive.", nameof(amount));
 

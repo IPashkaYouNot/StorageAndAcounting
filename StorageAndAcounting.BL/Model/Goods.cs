@@ -11,5 +11,6 @@ namespace StorageAndAcounting.BL.Model
         abstract public string Id { get; }
         abstract public string Brand { get; }
         abstract public decimal Price { get; }
+        abstract public bool IsEighteen { get; }
     }
 }

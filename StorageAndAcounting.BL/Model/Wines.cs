@@ -51,6 +51,8 @@ namespace StorageAndAcounting.BL.Model
 
         public override decimal Price { get; }
 
+        public override bool IsEighteen { get; } = true;
+
         public Wines(string brand)
         {
             if (string.IsNullOrWhiteSpace(brand)) throw new ArgumentNullException("Brand is NULL.");

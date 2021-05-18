@@ -146,7 +146,7 @@ namespace StorageAndAcounting.BL.Model
                             ListForProvider.Add(item.Key);
                         }
                     }
-                    order.Basket[item.Key] = 0;
+                    order.Basket.Remove(item.Key);
                 }
             }
             if (!IsEnough)
